@@ -23,8 +23,7 @@ bookmark: true
 The human genome is made of more than 6 billion letters, and each person has a unique configuration of A, C, G, and T the molecular building blocks that make up DNA. Determining the sequence of all those letters used to take vast amounts of money, time, and effort.
 
 Illumina’s sequencers use a method called “sequencing by synthesis” to decipher DNA. This process first requires that DNA strands, which are usually in double-helix form, be split into single strands. The DNA is then broken into short fragments that are spread onto a flow cell—a glass surface about the size of a smartphone. When a flow cell is loaded into the sequencer, the machine attaches color-coded fluorescent tags to each base: A, C, G, and T. For instance, blue might correspond to the letter A. Each of the DNA fragments gets copied one base at a time, and a matching strand of DNA is gradually made, or synthesized. A laser scans the bases one by one while a camera records the color coding for each letter. The process is repeated until every fragment is sequenced.
-
-"/assets/img/novaseq1.png"
+![novaseq](https://i1.wp.com/enseqlopedia.com/wp-content/uploads/2022/09/NovaSeq-X-specs.png?fit=1196%2C588&ssl=1){: width="50%" height="50%"}
 이러한 과정을 통해서 대용량의 데이터를 2~3일 이내로 컴퓨터의 데이터로 변환되어 확인이 가능하다.
 
 # 파일 형식(FASTA, FASTQ, BAM, VCF)
