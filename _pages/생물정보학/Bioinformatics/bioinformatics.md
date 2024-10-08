@@ -24,7 +24,7 @@ The human genome is made of more than 6 billion letters, and each person has a u
 
 Illumina’s sequencers use a method called “sequencing by synthesis” to decipher DNA. This process first requires that DNA strands, which are usually in double-helix form, be split into single strands. The DNA is then broken into short fragments that are spread onto a flow cell—a glass surface about the size of a smartphone. When a flow cell is loaded into the sequencer, the machine attaches color-coded fluorescent tags to each base: A, C, G, and T. For instance, blue might correspond to the letter A. Each of the DNA fragments gets copied one base at a time, and a matching strand of DNA is gradually made, or synthesized. A laser scans the bases one by one while a camera records the color coding for each letter. The process is repeated until every fragment is sequenced.
 
-![NOvaseq1](/assets/img/novaseq1.png)
+"/assets/img/novaseq1.png"
 이러한 과정을 통해서 대용량의 데이터를 2~3일 이내로 컴퓨터의 데이터로 변환되어 확인이 가능하다.
 
 # 파일 형식(FASTA, FASTQ, BAM, VCF)
@@ -32,7 +32,7 @@ Illumina’s sequencers use a method called “sequencing by synthesis” to dec
 Bioinformatics를 공부하면서 가장 많이 접하는 파일 형식으로는 .csv 일거라고 생각합니다.
 .csv파일을 열어보면 흔히 excel에서 열 수 있는 표 형태의 파일일 것 입니다!
 이는 텍스트 파일로 tsv는 tab으로 구분이 되는 tab separated value의 줄임말, csv는 comma로 구분이 되는 comma separated value의 줄임말입니다.
-![csv](/assets/img/csv.png)
+"/assets/img/csv.png"
 *csv 파일 형식*
 
 이렇듯 직관적으로 누구나 쉽게 데이터를 만질 수 있는 형태로 되어 있다면 bioinformatics라는 새로운 학문으로 만들어지지 않았겠죠? ㅠㅠ
