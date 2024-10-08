@@ -32,7 +32,7 @@ Illumina’s sequencers use a method called “sequencing by synthesis” to dec
 Bioinformatics를 공부하면서 가장 많이 접하는 파일 형식으로는 .csv 일거라고 생각합니다.
 .csv파일을 열어보면 흔히 excel에서 열 수 있는 표 형태의 파일일 것 입니다!
 이는 텍스트 파일로 tsv는 tab으로 구분이 되는 tab separated value의 줄임말, csv는 comma로 구분이 되는 comma separated value의 줄임말입니다.
-"/assets/img/csv.png"
+![csv](https://github.com/user-attachments/assets/022bdcf3-eb36-440a-9d7a-d37b7e0cefab){: width="50%" height="50%"}
 *csv 파일 형식*
 
 이렇듯 직관적으로 누구나 쉽게 데이터를 만질 수 있는 형태로 되어 있다면 bioinformatics라는 새로운 학문으로 만들어지지 않았겠죠? ㅠㅠ
@@ -55,7 +55,7 @@ non-coding RNA FASTA의 의미인 .frn
 **FASTQ**
 
 FASTA+Quality, 즉 FASTA 파일의 정보 (header+sequence)와 함께 quality 정보를 함께 담는 파일의 형식입니다.
-![fastq](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbl1Bh1%2Fbtq67RX5nyR%2F10OnQYj7rXYpl1BVEkD1z0%2Fimg.png)
+![fastq](https://github.com/user-attachments/assets/b1b8c72c-ed43-4cb3-aec2-b7449b06adf5)
 
 Line 1: Header오후 4:35 2024-10-08오후 4:35 2024-10-08
 Line 2: Sequence
