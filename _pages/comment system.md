@@ -51,8 +51,8 @@ Paste those values to `_config.yml` placed in the root directory.
 
 ```
 # External API
-giscus_repo: "[ENTER REPO HERE]"
-giscus_repoId: "[ENTER REPO ID HERE]"
-giscus_category: "[ENTER CATEGORY NAME HERE]"
-giscus_categoryId: "[ENTER CATEGORY ID HERE]"
+giscus_repo: "qjjin/qjjin_2"
+giscus_repoId: "R_kgDOMBh4pQ"
+giscus_category: "Q&A"
+giscus_categoryId: "DIC_kwDOMBh4pc4CjJsH"
 ```
