@@ -73,9 +73,3 @@ Genome은 version이 있다? (human genome hg19 vs hg38)
 
 
 ```
-# External API
-giscus_repo: "qjjin/qjjin_2"
-giscus_repoId: "R_kgDOMBh4pQ"
-giscus_category: "Q&A"
-giscus_categoryId: "DIC_kwDOMBh4pc4CjJsH"
-```
