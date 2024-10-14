@@ -1,53 +1,76 @@
 ---
-title: "Manage blog comments with Giscus"
+title: "Genome Browser"
 tags:
-    - user manual
-    - utility
-    - giscus
-date: "2024-02-03"
+    - omics
+    - NGS
+    - UCSC
+    - EMSEMBL
+date: "2024-10-14"
 thumbnail: "https://i.ibb.co/V9j2Qsg/giscus-Wl0-X3byd-az-U68-1.webp"
 bookmark: true
 ---
 
-[![goatcounter](https://opengraph.githubassets.com/4f866d5b634e7cd5422af77f8dbfb6d48dd288b7c5c18326544c1973210320ed/giscus/giscus){:class="img-lg"}](https://www.goatcounter.com/)
+놀고먹은 대학원생의 전공지식..ㅎ
 
-**Giscus** is a free **comments system** powered without your own database. Giscus uses the Github Discussions to store and load associated comments based on a chosen mapping (URL, pathname, title, etc.).
-
-To comment, visitors must authorize the giscus app to post on their behalf using the GitHub OAuth flow. Alternatively, visitors can comment on the GitHub Discussion directly. You can moderate the comments on GitHub.
-
-# Prerequisites
+# Question
 ---
 
-## Create a github repo
+![gb1](https://github.com/user-attachments/assets/0e525d25-98fe-457d-b4a9-cb38af8bc4be)
 
-You need a GitHub repository first. If you gonna use *GitHub Pages* for hosting your website, you can choose the corresponding repository (i.e., `[userID].github.io`)
+**위 POU5F1 (OCT4) 유전자 정보는 다음 중 어떤 strand에 존재하는가?**
 
-The repository should be **public**, otherwise visitors will not be able to view the discussion.
+5’ -> 3’ strand (Watson strand)
+3’ -> 5’ strand (Crick strand)
 
-## Turn on Discussion feature
+답이 무엇일까요?
 
-In your GitHub repository Settings, make sure that `General` > `Features` > `Discussions` feature is enabled.
 
-![Discussion](https://i.ibb.co/P1FV02D/giscus-00.png)
+![gb2](https://github.com/user-attachments/assets/4abbbe90-9180-4637-ba34-4706aff0249d)
 
-# Activate Giscus API
+모두 다 아시겠지만!! 힌트를 드리자면
+
+Exon: 단백질로 translation되는 정보를 담고 있는 유전자를 이루는 단위
+Intron: 단백질로 translation되지 않으며 transcription시 잘려나가는 부위
+UTR: 단백질로 translation되지 않으나 transcription 후 mRNA의 구성 요소
+Transcription direction: Genome상에 존재하는 gene의 strand에 따른 전사 방향
+
+
+
+# Genome browsers
 ---
+다양한 genome browser가 있습니다.
+그 중 대표적인 genome browser에는 아래와 같이 4가지의 브라우저가 있습니다..
 
-Follow the steps in [Configuration guide](https://giscus.app/). Make sure the verification of your repository is successful.
+UCSC genome browser
+(https://genome.ucsc.edu/)
 
-![Verification](https://i.ibb.co/y87w8rB/giscus-02.png)
+ENSEMBL genome browser
+(http://www.ensembl.org/index.html)
 
-Then, scroll down from the manual page and choose the `Discussion Category` options. You don't need to touch other configs.
+ECR browser
+(http://ecrbrowser.dcode.org/)
 
-![Verification](https://i.ibb.co/0hqLWX0/giscus-03.png)
+Integrative Genomics Viewer
+(https://igv.org/app/)
 
-## Copy  `_config.yml`
+![gb3](https://github.com/user-attachments/assets/be178925-4ffa-4796-bc0b-e15572b91ce7)
+한가지 더 질문!
+Genome은 version이 있다? (human genome hg19 vs hg38)
 
-Now, you get the giscus script. Copy the four properties marked with a red box as shown below:
 
-![](https://i.ibb.co/Z154x8P/giscus-04.png)
 
-Paste those values to `_config.yml` placed in the root directory.
+
+네 맞습니다. 버전에 차이가 있어요!
+
+유전체 버전의 차이는 주로 다음과 같은 요인에 의해 발생합니다:
+새로운 유전체 버전은 보다 정확한 염기 서열, 추가된 유전자 및 기능적 요소의 정의, 그리고 염색체 재배열 정보를 포함할 수 있습니다. 예를 들어, hg38은 hg19에 비해 보다 정밀한 서열과 업데이트된 유전자 주석을 제공
+인구 다양성: 새로운 유전체 버전은 다양한 인종 및 인구집단에서 얻은 데이터를 반영하여, 인종적 및 지역적 다양성을 보다 잘 표현
+오류 수정: 이전 버전에서 발견된 오류들이 새 버전에서 수정되어 정확도가 향상
+유전자 주석의 업데이트: 유전자 기능과 관련된 새로운 연구 결과가 추가되면서 유전자 주석이 업데이트
+
+이러한 차이는 유전체 데이터를 해석하고 사용하는 데 중요한 영향을 미칠 수 있습니다. 
+예를 들어, 유전체 위치를 기반으로 한 연구에서는 사용하는 버전이 결과에 중대한 영향을 줄 수 있습니다.
+
 
 ```
 # External API
