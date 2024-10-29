@@ -79,11 +79,11 @@ $ trim_galore -j 4 \ #사용할 쓰레드 수 지정(hotspot = 4)
 Input data files -> *fastq.gz (raw reads)
 Output data files ->  *fastq.gz (trimmed reads), *trimming_report.txt (trimming report)
 
-## Data Preprocessing
+## Data Mapping
 
 1. Download FASTA, GTF file 
    - [GENCODE](https://www.gencodegenes.org/)에서 **human** **mouse** 해당하는 항목 클릭
-   - GTF file은 main annotation file 다운로드 (직접 다운로드가 안될 시 터미널에서 wget 을 이용하여 다운로드)
-   - FASTA file은 Genome sequence file 다운로드 (직접 다운로드가 안될 시 터미널에서 wget 을 이용하여 다운로드)
+   - GTF file은 main annotation file 다운로드 (직접 다운로드가 안될 시 터미널에서 'wget' 이용)
+   - FASTA file은 Genome sequence file 다운로드 (직접 다운로드가 안될 시 터미널에서 'wget' 이용)
 
 
