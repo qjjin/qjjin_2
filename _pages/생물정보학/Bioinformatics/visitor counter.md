@@ -76,4 +76,60 @@ Output data files ->  *fastq.gz (trimmed reads), *trimming_report.txt (trimming 
    - GTF file은 main annotation file 다운로드 (직접 다운로드가 안될 시 터미널에서 `wget` 이용)
    - FASTA file은 Genome sequence file 다운로드 (직접 다운로드가 안될 시 터미널에서 `wget` 이용)
 
+2. Build STAR Reference
+   - FASTA + GTF ⇒ STAR reference
+```
+$ STAR --runThreadN 24 \ #사용할 쓰레드 수 지정
+       --runMode genomeGenerate \ 
+       --genomeDir /path/to/STAR/genome/directory \ #output directory 지정
+       --genomeFastaFiles /path/to/genome/fasta/file \ #FASTA file directory 입력
+       --sjdbGTFfile /path/to/annotation/gtf/file  #GTF file directory 입력
+```
+Input data files ( FASTA, GTF)
+- .fasta or .fa (genome sequences)
+- .gtf (genome annotation)
 
+Output data files ( STAR reference)
+- chrLength.txt
+- chrNameLength.txt
+- chrName.txt
+- chrStart.txt
+- exonGeTrInfo.tab
+- exonInfo.tab
+- geneInfo.tab
+- Genome
+- genomeParameters.txt
+- SA
+- SAindex
+- sjdbInfo.txt
+- sjdbList.fromGTF.out.tab
+- sjdbList.out.tab
+- transcriptInfo.tab
+
+3. STAR Map Reads
+   - STAR reference + FASTQ trimmed → STAR ⇒ BAM
+```
+$ STAR --genomeDir /path/to/STAR/genome/directory \ #STAR reference directory 입력
+       --alignMatesGapMax 1000000 \ # only needed for PE studies
+       --outFilterType BySJout \ 
+       --readFilesCommand zcat \ #gz압축파일을 input하기 때문
+       --runThreadN 8 \ #사용할 쓰레드 수 지정
+       --outSAMtype BAM SortedByCoordinate \ 
+       --quantMode TranscriptomeSAM \ #gene 단위가 아닌 transcriptome 단위로 받음. 이 결과로 나온 파일을 다음 단계인 RSEM에 사용
+       --outFileNamePrefix /path/to/STAR-output/directory/<sample_name> \ #output 경로 지정
+       --readFilesIn /path/to/trimmed_forward_reads \ #FASTQ trimmed file directory 입력
+       /path/to/trimmed_reverse_reads  #only needed for PE studies
+
+# --runThreadN  쓰레드 수가 높으면 오류 발생
+```
+Input data files (STAR reference, FASTQ trimmed)
+- STAR index directory
+- *fastq.gz (trimmed reads)
+
+Output data files (BAM)
+- *Aligned.sortedByCoord.out.bam (sorted mapping to genome)
+- *Aligned.toTranscriptome.out.bam (sorted mapping to transcriptome)
+- *Log.final.out (read mapped, ect)
+- *Log.out
+- *Log.progress.out
+- *SJ.out.tab
