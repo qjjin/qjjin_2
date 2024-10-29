@@ -14,12 +14,10 @@ bookmark: true
 RNA-seq의 경우 GEO에 넘쳐나는데 이 데이터를 어떻게 분석을 해야하나 힘드셨을 겁니다.
 또한 NGS를 진행했는데 raw data만 받아서 파일을 사용하지도 못하고 있는 분도 계실겁니다.
 리눅스를 다룰 줄 모르거나 적절한 사양의 서버가 없어서 등 다양한 이유가 있을텐데 오늘 제가 알아볼 내용은 리눅스 운영체제의 컴퓨터가 필요해요 ㅠㅠ
-다음번에는 리눅스 명령어 없이, 서버 없이 RNA-seq 데이터를 raw-data 부터 분석하는 법을 말씀드릴 겁니다!
-
-# GEO datasets
+다음번에는 리눅스 명령어 없이, 서버 없이 RNA-seq 데이터를 raw-data 부터 분석하는 법을 말씀드릴 겁니다! 
 ---
 
-## 그럼 분석을 시작해볼까요?
+## GEO datasets
 
 가장 먼저 해야할 일은 데이터를 얻는 방법입니다.
 원하시는 GEO series 페이지에 들어가시면, 페이지의 아래쪽에서 SRP 정보를 찾으실 수 있습니다.
@@ -78,17 +76,14 @@ $ trim_galore -j 4 \ #사용할 쓰레드 수 지정(hotspot = 4)
               /path/to/forward/reads \
               /path/to/reverse/reads #if single end, only forward reads
 ```
-Input data files (FASTQ raw)
+Input data files -> *fastq.gz (raw reads)
+Output data files ->  *fastq.gz (trimmed reads), *trimming_report.txt (trimming report)
 
-- *fastq.gz (raw reads)
+## Data Preprocessing
 
-Output data files (FASTQ trimmed)
+1. Download FASTA, GTF file 
+   - [GENCODE](https://www.gencodegenes.org/)에서 **human** **mouse** 해당하는 항목 클릭
+   - GTF file은 main annotation file 다운로드 (직접 다운로드가 안될 시 터미널에서 wget 을 이용하여 다운로드)
+   - FASTA file은 Genome sequence file 다운로드 (직접 다운로드가 안될 시 터미널에서 wget 을 이용하여 다운로드)
 
-- *fastq.gz (trimmed reads)
-- *trimming_report.txt (trimming report)
-
-
-Make sure `Allow adding visitor counts on your website` is checked:
-
-![](https://i.ibb.co/R7TKCmy/2024-01-13-043651.png){:class="img-md"}
 
