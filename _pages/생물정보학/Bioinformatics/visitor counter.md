@@ -23,7 +23,7 @@ RNA-seq의 경우 GEO에 넘쳐나는데 이 데이터를 어떻게 분석을 �
 원하시는 GEO series 페이지에 들어가시면, 페이지의 아래쪽에서 SRP 정보를 찾으실 수 있습니다.
 ![geo](https://github.com/user-attachments/assets/f07957b2-0892-4051-981a-1dd017aa69e2)
 ![table1](https://github.com/user-attachments/assets/2c8d0877-80b1-46a8-b7f1-76ffd889fc00)
-
+오후 3:05 2024-10-29오후 3:05 2024-10-29오후 3:05 2024-10-29
 ## Download Data
 
 1. Gene Expression Omnibus 에서 GEO DataSets 키워드 검색 
@@ -73,7 +73,7 @@ Output data files ->  *fastq.gz (trimmed reads), *trimming_report.txt (trimming 
 
 1. Download FASTA, GTF file 
    - [GENCODE](https://www.gencodegenes.org/)에서 **human** **mouse** 해당하는 항목 클릭
-   - GTF file은 main annotation file 다운로드 (직접 다운로드가 안될 시 터미널에서 'wget' 이용)
-   - FASTA file은 Genome sequence file 다운로드 (직접 다운로드가 안될 시 터미널에서 'wget' 이용)
+   - GTF file은 main annotation file 다운로드 (직접 다운로드가 안될 시 터미널에서 `wget` 이용)
+   - FASTA file은 Genome sequence file 다운로드 (직접 다운로드가 안될 시 터미널에서 `wget` 이용)
 
 
