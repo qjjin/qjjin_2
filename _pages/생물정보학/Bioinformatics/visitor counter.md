@@ -33,28 +33,7 @@ MYBL2, FOXM1 활성 억제, 세포 사멸 및 세포주기 유전자 조절하�
 
 MYBL2와 FOXM1이 세포 주기 유전자를 함께 활성화하여 폐 선암종 세포에서 발암성 전사 인자로 작용하고 이들이 질병에 대한 잠재적인 치료 표적임을 시사
 ```
-<html>
-<body>
-<!--StartFragment-->
-SampleName | Group | SRR number
--- | -- | --
-siControl rep1 | control | SRR18885343
-siControl rep2 | control | SRR18885342
-siControl rep3 | control | SRR18885341
-siControl rep4 | control | SRR18885340
-siFOXM1 rep1 | test | SRR18885347
-siFOXM1 rep2 | test | SRR18885346
-siFOXM1 rep3 | test | SRR18885345
-siFOXM1 rep4 | test | SRR18885344
-siMYBL2 rep1 | test2 | SRR18885351
-siMYBL2 rep2 | test2 | SRR18885350
-siMYBL2 rep3 | test2 | SRR18885349
-siMYBL2 rep4 | test2 | SRR18885348
-
-<!--EndFragment-->
-</body>
-</html>
-
+![table1](https://github.com/user-attachments/assets/2c8d0877-80b1-46a8-b7f1-76ffd889fc00)
 
 ## Download Data
 
@@ -71,14 +50,14 @@ siMYBL2 rep4 | test2 | SRR18885348
 fastq-dump설치 과정은 위 사이트를 참고해주세요!
 ```
 $ fastq-dump --gzip \ #gz압축파일로 다운로드
-						 --split-files \ #for paired-end studies
-						 SRR<number>
+--split-files \ #for paired-end studies
+SRR<number>
 
 # or can use fasterq-dump(fasterq-dump is the faster one)
 
 $ fasterq-dump -p \
-               --split-3 \ # for both single and paired-end
-               SRR<number>
+--split-3 \ # for both single and paired-end
+ SRR<number>
 ```
 
 ```
