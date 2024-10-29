@@ -108,6 +108,7 @@ Output data files ( STAR reference)
 
 3. STAR Map Reads
    - STAR reference + FASTQ trimmed → STAR ⇒ BAM
+
 ```
 $ STAR --genomeDir /path/to/STAR/genome/directory \ #STAR reference directory 입력
        --alignMatesGapMax 1000000 \ # only needed for PE studies
@@ -119,8 +120,6 @@ $ STAR --genomeDir /path/to/STAR/genome/directory \ #STAR reference directory �
        --outFileNamePrefix /path/to/STAR-output/directory/<sample_name> \ #output 경로 지정
        --readFilesIn /path/to/trimmed_forward_reads \ #FASTQ trimmed file directory 입력
        /path/to/trimmed_reverse_reads  #only needed for PE studies
-
-# --runThreadN  쓰레드 수가 높으면 오류 발생
 ```
 Input data files (STAR reference, FASTQ trimmed)
 - STAR index directory
