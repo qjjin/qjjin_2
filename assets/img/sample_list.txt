@@ -1,0 +1,12 @@
+BT20-Sh-1	/home/gyujin/Desktop/data/04.StringTie/BT20-Sh-1Aligned.gtf
+BT20-Sh-2	/home/gyujin/Desktop/data/04.StringTie/BT20-Sh-2Aligned.gtf
+BT20-Sh-3	/home/gyujin/Desktop/data/04.StringTie/BT20-Sh-3Aligned.gtf
+BT20-SW-1	/home/gyujin/Desktop/data/04.StringTie/BT20-SW-1Aligned.gtf
+BT20-SW-2	/home/gyujin/Desktop/data/04.StringTie/BT20-SW-2Aligned.gtf
+BT20-SW-3	/home/gyujin/Desktop/data/04.StringTie/BT20-SW-3Aligned.gtf
+MB231-OE-1	/home/gyujin/Desktop/data/04.StringTie/MB231-OE-1Aligned.gtf
+MB231-OE-2	/home/gyujin/Desktop/data/04.StringTie/MB231-OE-2Aligned.gtf
+MB231-OE-3	/home/gyujin/Desktop/data/04.StringTie/MB231-OE-3Aligned.gtf
+MB231-Vev-1	/home/gyujin/Desktop/data/04.StringTie/MB231-Vev-1Aligned.gtf
+MB231-Vev-2	/home/gyujin/Desktop/data/04.StringTie/MB231-Vev-2Aligned.gtf
+MB231-Vev-3	/home/gyujin/Desktop/data/04.StringTie/MB231-Vev-3Aligned.gtf

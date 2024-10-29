@@ -132,3 +132,51 @@ Output data files (BAM)
 - *Log.out
 - *Log.progress.out
 - *SJ.out.tab
+
+## PreRead Counting
+
+1. [samtools](https://www.htslib.org/)
+
+```
+samtools index Desktop/data/output/STAR/SRR23085774.bam
+```
+
+2. [RSeQC](https://rseqc.sourceforge.net/)
+
+```
+# infer_experiment(Strandness 판단)
+infer_experiment.py -r Desktop/data/reference/hg38_GENCODE_V42_Comprehensive.bed -i Desktop/data/output/STAR/BT20-SW-1Aligned.sortedByCoord.out.bam
+
+#This is PairEnd Data
+Fraction of reads failed to determine: 0.0342
+Fraction of reads explained by "1++,1--,2+-,2-+": 0.0151
+Fraction of reads explained by "1+-,1-+,2++,2--": 0.9507
+# stranded
+```
+
+## Read Quantification
+
+1. [StringTie](https://ccb.jhu.edu/software/stringtie/)
+[sample_list.txt](https://github.com/user-attachments/files/17552930/sample_list.txt)
+위 파일을 확인하시고 list파일을 만들어 주셔야합니다.
+
+```
+# stringtie
+stringtie -e -B --rf -G ~/Desktop/RNA-seq/GTF/gencode.v42.basic.annotation.gtf -p 20 -o 3.StringTie/sample.gtf 1.STAR/sample.sotredByCoord.out.bam
+
+# prepDE(DESeq2 돌리기 전 data 정리)
+prepDE.py3 -i sample_list.txt
+# sample list
+BT20-Sh-1	/home/gyujin/Desktop/data/04.StringTie/BT20-Sh-1Aligned.gtf
+BT20-Sh-2	/home/gyujin/Desktop/data/04.StringTie/BT20-Sh-2Aligned.gtf
+BT20-Sh-3	/home/gyujin/Desktop/data/04.StringTie/BT20-Sh-3Aligned.gtf
+BT20-SW-1	/home/gyujin/Desktop/data/04.StringTie/BT20-SW-1Aligned.gtf
+BT20-SW-2	/home/gyujin/Desktop/data/04.StringTie/BT20-SW-2Aligned.gtf
+BT20-SW-3	/home/gyujin/Desktop/data/04.StringTie/BT20-SW-3Aligned.gtf
+MB231-OE-1	/home/gyujin/Desktop/data/04.StringTie/MB231-OE-1Aligned.gtf
+MB231-OE-2	/home/gyujin/Desktop/data/04.StringTie/MB231-OE-2Aligned.gtf
+MB231-OE-3	/home/gyujin/Desktop/data/04.StringTie/MB231-OE-3Aligned.gtf
+MB231-Vev-1	/home/gyujin/Desktop/data/04.StringTie/MB231-Vev-1Aligned.gtf
+MB231-Vev-2	/home/gyujin/Desktop/data/04.StringTie/MB231-Vev-2Aligned.gtf
+MB231-Vev-3	/home/gyujin/Desktop/data/04.StringTie/MB231-Vev-3Aligned.gtf
+```
