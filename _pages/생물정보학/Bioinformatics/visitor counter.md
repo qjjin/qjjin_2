@@ -22,15 +22,6 @@ RNA-seq의 경우 GEO에 넘쳐나는데 이 데이터를 어떻게 분석을 �
 가장 먼저 해야할 일은 데이터를 얻는 방법입니다.
 원하시는 GEO series 페이지에 들어가시면, 페이지의 아래쪽에서 SRP 정보를 찾으실 수 있습니다.
 ![geo](https://github.com/user-attachments/assets/f07957b2-0892-4051-981a-1dd017aa69e2)
-
-```
-MYBL2 발현이 폐 선암종 세포에서 transcriptional activator 역할
-MYBL2와 FOXM1 → 프로모토에 결합하여 세포 주기 조절
-FOXM1의 inhibitor인 FDI-6(forkhead domain inhibitor 6) → 
-MYBL2, FOXM1 활성 억제, 세포 사멸 및 세포주기 유전자 조절하여 lung cancer cell 증식을 억제
-
-MYBL2와 FOXM1이 세포 주기 유전자를 함께 활성화하여 폐 선암종 세포에서 발암성 전사 인자로 작용하고 이들이 질병에 대한 잠재적인 치료 표적임을 시사
-```
 ![table1](https://github.com/user-attachments/assets/2c8d0877-80b1-46a8-b7f1-76ffd889fc00)
 
 ## Download Data
@@ -52,7 +43,6 @@ $ fastq-dump --gzip \ #gz압축파일로 다운로드
 SRR<number>
 
 # or can use fasterq-dump(fasterq-dump is the faster one)
-
 $ fasterq-dump -p \
 --split-3 \ # for both single and paired-end
  SRR<number>
