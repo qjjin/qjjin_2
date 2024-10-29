@@ -143,6 +143,94 @@ samtools index Desktop/data/output/STAR/SRR23085774.bam
 
 2. [RSeQC](https://rseqc.sourceforge.net/)
 
+`infer_experiment.py`
+
+RNA-seq 시퀀싱이 가닥 특이적(stranded)인지 비가닥 특이적(non-stranded)인지 파악하기 위해 "읽기의 가닥(strandness of reads)"과 "전사체의 가닥(strandness of transcripts)"을 비교하는 프로그램입니다.
+
+"strandness of reads": RNA-seq 데이터의 읽기(reads)가 어느 가닥에 매핑되었는지 정렬(alignment) 과정에서 확인합니다.
+"strandness of transcripts": 주석 파일(annotation file)을 통해 전사체가 어느 가닥에 위치하는지 파악합니다.
+
+이 프로그램은 RNA 시퀀싱 프로토콜의 정보를 사전에 알 필요 없이, RNA 시퀀싱 읽기(reads)를 비가닥 특이적인 것처럼 mapping한 후 가닥 정보를 추정할 수 있습니다.
+
+For pair-end RNA-seq, there are two different ways to strand reads (such as Illumina ScriptSeq protocol):
+
+1++,1–,2+-,2-+
+
+read1 mapped to ‘+’ strand indicates parental gene on ‘+’ strand
+
+read1 mapped to ‘-’ strand indicates parental gene on ‘-’ strand
+
+read2 mapped to ‘+’ strand indicates parental gene on ‘-’ strand
+
+read2 mapped to ‘-’ strand indicates parental gene on ‘+’ strand
+
+1+-,1-+,2++,2–
+
+read1 mapped to ‘+’ strand indicates parental gene on ‘-’ strand
+
+read1 mapped to ‘-’ strand indicates parental gene on ‘+’ strand
+
+read2 mapped to ‘+’ strand indicates parental gene on ‘+’ strand
+
+read2 mapped to ‘-’ strand indicates parental gene on ‘-’ strand
+
+For single-end RNA-seq, there are also two different ways to strand reads:
+
+++,–
+
+read mapped to ‘+’ strand indicates parental gene on ‘+’ strand
+
+read mapped to ‘-’ strand indicates parental gene on ‘-’ strand
+
++-,-+
+
+read mapped to ‘+’ strand indicates parental gene on ‘-’ strand
+
+read mapped to ‘-’ strand indicates parental gene on ‘+’ strand
+
+**Example 1 : Pair-end non strand specific
+
+```
+infer_experiment.py -r hg19.refseq.bed12 -i Pairend_nonStrandSpecific_36mer_Human_hg19.bam
+
+#Output::
+
+This is PairEnd Data
+Fraction of reads failed to determine: 0.0172
+Fraction of reads explained by "1++,1--,2+-,2-+": 0.4903
+Fraction of reads explained by "1+-,1-+,2++,2--": 0.4925
+```
+Interpretation: 1.72% of total reads were mapped to genome regions that we cannot determine the “standness of transcripts” (such as regions that having both strands transcribed). For the remaining 98.28% (1 - 0.0172 = 0.9828) of reads, half can be explained by “1++,1–,2+-,2-+”, while the other half can be explained by “1+-,1-+,2++,2–“. We conclude that this is NOT a strand specific dataset because “strandness of reads” was independent of “standness of transcripts”
+
+**Example 2 : Pair-end strand specific
+
+```
+infer_experiment.py -r hg19.refseq.bed12 -i Pairend_StrandSpecific_51mer_Human_hg19.bam
+
+#Output::
+
+This is PairEnd Data
+Fraction of reads failed to determine: 0.0072
+Fraction of reads explained by "1++,1--,2+-,2-+": 0.9441
+Fraction of reads explained by "1+-,1-+,2++,2--": 0.0487
+```
+Interpretation: 0.72% of total reads were mapped to genome regions that we cannot determine the “standness of transcripts” (such as regions that having both strands transcribed). For the remaining 99.28% (1 - 0.0072 = 0.9928) of reads, the vast majority was explained by “1++,1–,2+-,2-+”, suggesting a strand-specific dataset.
+
+
+**Example 3 : Single-end strand specific
+
+```
+infer_experiment.py -r hg19.refseq.bed12 -i SingleEnd_StrandSpecific_36mer_Human_hg19.bam
+
+#Output::
+
+This is SingleEnd Data
+Fraction of reads failed to determine: 0.0170
+Fraction of reads explained by "++,--": 0.9669
+Fraction of reads explained by "+-,-+": 0.0161
+```
+Interpretation: This is single-end, strand specific RNA-seq data. Strandness of reads are concordant with strandness of reference gene.
+
 ```
 # infer_experiment(Strandness 판단)
 infer_experiment.py -r Desktop/data/reference/hg38_GENCODE_V42_Comprehensive.bed -i Desktop/data/output/STAR/BT20-SW-1Aligned.sortedByCoord.out.bam
@@ -151,8 +239,19 @@ infer_experiment.py -r Desktop/data/reference/hg38_GENCODE_V42_Comprehensive.bed
 Fraction of reads failed to determine: 0.0342
 Fraction of reads explained by "1++,1--,2+-,2-+": 0.0151
 Fraction of reads explained by "1+-,1-+,2++,2--": 0.9507
-# stranded
 ```
+
+위 예시는 **1+-,1-+,2++,2--** 의 수치가  **1++,1--,2+-,2-+** 보다 큰 경우입니다.
+이 경우는 Pair-end strand specific한 경우겠죠?
+이렇게  infer_experiment.py의 정보가 필요한 이유는 이후 과정인 Read Quantification에서 StringTie라는 tool을 사용해야하기 떄문이죠.
+
+StringTie의 옵션의 경우 
+
+--rf	Assumes a stranded library fr-firststrand 
+--fr	Assumes a stranded library fr-secondstrand.
+
+두가지의 옵션에서 선택을 해줘야하기 때문이에요.
+위 예시는 **1+-,1-+,2++,2--** 의 수치가  **1++,1--,2+-,2-+** 보다 큰 경우이기에 --rf 옵션을 선택해야겠죠?
 
 ## Read Quantification
 
