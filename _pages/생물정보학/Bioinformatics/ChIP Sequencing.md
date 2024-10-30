@@ -14,9 +14,8 @@ bookmark: true
 
 **Ch**romatin **I**mmuno**P**recipitation followed by sequencing (ChIP-Seq)으로 NGS 기술을 활용한 세포내 전사조절인자 규명을 위해 이용된다. 특정 단백질의 세포내 전자 조절인자로서의 기능을 알고자 할때 특정 단백질이 binding하는 DNA 서열을 NGS로 시퀀싱하여 유전체 전체에서 binding 가능한 motif 를 search 한다.
 
-![ChIP1](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b04265a2-e317-4a9c-a56c-85cfb52207d1/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-03-18_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.01.28.png)
-
-![ChIP2](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d6284100-d9b9-40a9-83fb-0e88caee56da/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-03-18_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.02.18.png)
+![ChIP1](https://media.cellsignal.com/www/images/resources/applications/chip-educational/chip-protocol-steps.png)
+![ChIP2](https://www.merckmillipore.com/INTERSHOP/static/WFS/Merck-KR-Site/-/Merck/ko_KR/Freestyle/BI-Bioscience/Genomic-Analysis/Epigenetics/chip-chip-workflow.jpg)
 
 DNA에 binding한 protein 혹은 histone modification을 검출하기 위한 분석방법
 
