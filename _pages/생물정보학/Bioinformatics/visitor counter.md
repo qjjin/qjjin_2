@@ -153,35 +153,40 @@ Output data files ->  *fastq.gz (trimmed reads), *trimming_report.txt (trimming 
    - GTF file은 main annotation file 다운로드 (직접 다운로드가 안될 시 터미널에서 `wget` 이용)
    - FASTA file은 Genome sequence file 다운로드 (직접 다운로드가 안될 시 터미널에서 `wget` 이용)
 
-2. Build STAR Reference
+2. Build STAR Reference  
    - FASTA + GTF ⇒ STAR reference
-```
+
+```bash
 $ STAR --runThreadN 24 \ #사용할 쓰레드 수 지정
        --runMode genomeGenerate \ 
        --genomeDir /path/to/STAR/genome/directory \ #output directory 지정
        --genomeFastaFiles /path/to/genome/fasta/file \ #FASTA file directory 입력
        --sjdbGTFfile /path/to/annotation/gtf/file  #GTF file directory 입력
 ```
-Input data files ( FASTA, GTF)
-- .fasta or .fa (genome sequences)
-- .gtf (genome annotation)
 
-Output data files ( STAR reference)
-- chrLength.txt
-- chrNameLength.txt
-- chrName.txt
-- chrStart.txt
-- exonGeTrInfo.tab
-- exonInfo.tab
-- geneInfo.tab
-- Genome
-- genomeParameters.txt
-- SA
-- SAindex
-- sjdbInfo.txt
-- sjdbList.fromGTF.out.tab
-- sjdbList.out.tab
-- transcriptInfo.tab
+| **Input data files** | **Description**                   |
+|----------------------|-----------------------------------|
+| .fasta or .fa        | Genome sequences                 |
+| .gtf                 | Genome annotation                |
+
+| **Output data files**     | **Description**                   |
+|---------------------------|-----------------------------------|
+| chrLength.txt             |                                   |
+| chrNameLength.txt         |                                   |
+| chrName.txt               |                                   |
+| chrStart.txt              |                                   |
+| exonGeTrInfo.tab          |                                   |
+| exonInfo.tab              |                                   |
+| geneInfo.tab              |                                   |
+| Genome                    |                                   |
+| genomeParameters.txt      |                                   |
+| SA                        |                                   |
+| SAindex                   |                                   |
+| sjdbInfo.txt              |                                   |
+| sjdbList.fromGTF.out.tab  |                                   |
+| sjdbList.out.tab          |                                   |
+| transcriptInfo.tab        |                                   |
+
 
 3. STAR Map Reads
    - STAR reference + FASTQ trimmed → STAR ⇒ BAM
