@@ -5,7 +5,7 @@ tags:
     - NGS
     - transcriptome
 date: "2024-10-29"
-thumbnail: "https://i.ibb.co/xj20N3N/card.webp"
+thumbnail: "![image](https://github.com/user-attachments/assets/47f81b7f-7e17-4517-bc34-e757c1a58d0c)"
 bookmark: true
 ---
 
