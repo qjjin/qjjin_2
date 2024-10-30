@@ -188,10 +188,10 @@ $ STAR --runThreadN 24 \ #사용할 쓰레드 수 지정
 | transcriptInfo.tab        |                                   |
 
 
-3. STAR Map Reads
+3. STAR Map Reads  
    - STAR reference + FASTQ trimmed → STAR ⇒ BAM
 
-```
+```bash
 $ STAR --genomeDir /path/to/STAR/genome/directory \ #STAR reference directory 입력
        --alignMatesGapMax 1000000 \ # only needed for PE studies
        --outFilterType BySJout \ 
@@ -203,17 +203,21 @@ $ STAR --genomeDir /path/to/STAR/genome/directory \ #STAR reference directory �
        --readFilesIn /path/to/trimmed_forward_reads \ #FASTQ trimmed file directory 입력
        /path/to/trimmed_reverse_reads  #only needed for PE studies
 ```
-Input data files (STAR reference, FASTQ trimmed)
-- STAR index directory
-- *fastq.gz (trimmed reads)
 
-Output data files (BAM)
-- *Aligned.sortedByCoord.out.bam (sorted mapping to genome)
-- *Aligned.toTranscriptome.out.bam (sorted mapping to transcriptome)
-- *Log.final.out (read mapped, ect)
-- *Log.out
-- *Log.progress.out
-- *SJ.out.tab
+| **Input data files**         | **Description**                     |
+|------------------------------|-------------------------------------|
+| STAR index directory         | STAR reference directory           |
+| *fastq.gz (trimmed reads)    | Trimmed reads in FASTQ format      |
+
+| **Output data files**                     | **Description**                             |
+|-------------------------------------------|---------------------------------------------|
+| *Aligned.sortedByCoord.out.bam            | Sorted mapping to genome                   |
+| *Aligned.toTranscriptome.out.bam          | Sorted mapping to transcriptome            |
+| *Log.final.out                            | Read mapping summary                       |
+| *Log.out                                  | STAR log file                              |
+| *Log.progress.out                         | STAR progress log                          |
+| *SJ.out.tab                               | Splice junction information                |
+
 
 ## PreRead Counting
 
