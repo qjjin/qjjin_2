@@ -240,7 +240,7 @@ RNA-seq 시퀀싱이 가닥 특이적(stranded)인지 비가닥 특이적(non-st
 
 이 프로그램은 RNA 시퀀싱 프로토콜의 정보를 사전에 알 필요 없이, RNA 시퀀싱 읽기(reads)를 비가닥 특이적인 것처럼 mapping한 후 가닥 정보를 추정할 수 있습니다.
 
-For pair-end RNA-seq, there are two different ways to strand reads (such as Illumina ScriptSeq protocol):
+**For pair-end RNA-seq, there are two different ways to strand reads (such as Illumina ScriptSeq protocol):**
 
 1++,1–,2+-,2-+
 
@@ -262,7 +262,7 @@ read2 mapped to ‘+’ strand indicates parental gene on ‘+’ strand
 
 read2 mapped to ‘-’ strand indicates parental gene on ‘-’ strand
 
-For single-end RNA-seq, there are also two different ways to strand reads:
+**For single-end RNA-seq, there are also two different ways to strand reads:**
 
 ++,–
 
@@ -276,7 +276,7 @@ read mapped to ‘+’ strand indicates parental gene on ‘-’ strand
 
 read mapped to ‘-’ strand indicates parental gene on ‘+’ strand
 
-**Example 1 : Pair-end non strand specific
+**Example 1 : Pair-end non strand specific**
 
 ```
 infer_experiment.py -r hg19.refseq.bed12 -i Pairend_nonStrandSpecific_36mer_Human_hg19.bam
@@ -290,7 +290,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.4925
 ```
 Interpretation: 1.72% of total reads were mapped to genome regions that we cannot determine the “standness of transcripts” (such as regions that having both strands transcribed). For the remaining 98.28% (1 - 0.0172 = 0.9828) of reads, half can be explained by “1++,1–,2+-,2-+”, while the other half can be explained by “1+-,1-+,2++,2–“. We conclude that this is NOT a strand specific dataset because “strandness of reads” was independent of “standness of transcripts”
 
-**Example 2 : Pair-end strand specific
+**Example 2 : Pair-end strand specific**
 
 ```
 infer_experiment.py -r hg19.refseq.bed12 -i Pairend_StrandSpecific_51mer_Human_hg19.bam
@@ -305,7 +305,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.0487
 Interpretation: 0.72% of total reads were mapped to genome regions that we cannot determine the “standness of transcripts” (such as regions that having both strands transcribed). For the remaining 99.28% (1 - 0.0072 = 0.9928) of reads, the vast majority was explained by “1++,1–,2+-,2-+”, suggesting a strand-specific dataset.
 
 
-**Example 3 : Single-end strand specific
+**Example 3 : Single-end strand specific**
 
 ```
 infer_experiment.py -r hg19.refseq.bed12 -i SingleEnd_StrandSpecific_36mer_Human_hg19.bam
