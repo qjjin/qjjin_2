@@ -229,7 +229,7 @@ samtools index Desktop/data/output/STAR/SRR23085774.bam
 
 2. [RSeQC](https://rseqc.sourceforge.net/)
 
-`infer_experiment.py`
+   infer_experiment.py
 
 RNA-seq 시퀀싱이 가닥 특이적(stranded)인지 비가닥 특이적(non-stranded)인지 파악하기 위해 "읽기의 가닥(strandness of reads)"과 "전사체의 가닥(strandness of transcripts)"을 비교하는 프로그램입니다.
 
