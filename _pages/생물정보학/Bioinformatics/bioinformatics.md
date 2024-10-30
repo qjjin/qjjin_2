@@ -10,8 +10,6 @@ thumbnail: "/assets/img/thumbnail/sample.png"
 bookmark: true
 ---
 
-놀고먹은 대학원생의 전공지식..ㅎ
-
 # Bioinformatics
 ---
 **Bioinformatics** is an interdisciplinary field that develops methods and software tools for understanding **biological data**, in particular when the data sets are large and complex. As an interdisciplinary field of science, bioinformatics combines **biology**, **computer science**, **information engineering**, **mathematics and statistics** to analyze and interpret the **biological data**. Bioinformatics has been used for *in silico* analyses of biological queries using **mathematical and statistical techniques**. 
