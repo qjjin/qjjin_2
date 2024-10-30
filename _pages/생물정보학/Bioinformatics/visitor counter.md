@@ -22,7 +22,25 @@ RNA-seq의 경우 GEO에 넘쳐나는데 이 데이터를 어떻게 분석을 �
 가장 먼저 해야할 일은 데이터를 얻는 방법입니다.
 원하시는 GEO series 페이지에 들어가시면, 페이지의 아래쪽에서 SRP 정보를 찾으실 수 있습니다.
 ![geo](https://github.com/user-attachments/assets/f07957b2-0892-4051-981a-1dd017aa69e2)
-![table1](https://github.com/user-attachments/assets/2c8d0877-80b1-46a8-b7f1-76ffd889fc00)
+
+[GSE201272](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE201272)
+
+|   SampleName   |  Group  |  SRR number |
+|:--------------:|:-------:|:-----------:|
+| siControl rep1 | control | SRR18885343 |
+| siControl rep2 | control | SRR18885342 |
+| siControl rep3 | control | SRR18885341 |
+| siControl rep4 | control | SRR18885340 |
+| siFOXM1 rep1   | test    | SRR18885347 |
+| siFOXM1 rep2   | test    | SRR18885346 |
+| siFOXM1 rep3   | test    | SRR18885345 |
+| siFOXM1 rep4   | test    | SRR18885344 |
+| siMYBL2 rep1   | test2   | SRR18885351 |
+| siMYBL2 rep2   | test2   | SRR18885350 |
+| siMYBL2 rep3   | test2   | SRR18885349 |
+| siMYBL2 rep4   | test2   | SRR18885348 |
+
+위 표는 RNA-seq 데이터를 정리한 표입니다
 
 ## Download Data
 
