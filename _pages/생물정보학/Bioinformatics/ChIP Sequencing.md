@@ -60,12 +60,11 @@ $ trim_galore -j 4 \ #사용할 쓰레드 수 지정(hotspot = 4)
 [Reference Genome data Download](https://www.gencodegenes.org/)
 
 > bowtie2-Build
-
 ```
 $ bowtie2-build Desktop/ChIP-Seq/fasta/GRCh38.p13.genome.fa GRCh38
 ```
-> bowtie2
 
+> bowtie2
 ```
 $ bowtie2 -p 8 -x Desktop/ChIP-Seq/bowtie2/reference/GRCh38 file.fastq > file.sam
 ```
@@ -78,19 +77,18 @@ $ samtools view -b -S file.sam > file.bam
 
 ### Sorting
 [sambamba](https://github.com/biod/sambamba)
-
 > Sort BAM file by genomic coordinates
 
 ```
 $ sambamba sort -p -t 8 -o file.sorted.bam file.bam
 ```
-> Filter out duplicates
 
+> Filter out duplicates
 ```
 $ sambamba view -p -h -t 8 -f bam -F "[XS] == null and not unmapped and not duplicate" file.sorted.bam > file.rmdup.bam
 ```
-> Index BAM
 
+> Index BAM
 ```
 $ samtools index file.rmdup.bam
 ```
