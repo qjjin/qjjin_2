@@ -6,7 +6,7 @@ tags:
     - UCSC
     - EMSEMBL
 date: "2024-10-14"
-thumbnail: "![image](https://github.com/user-attachments/assets/dca15375-1046-4115-ab26-91865332ab2d)"
+thumbnail: "/assets/img/thumbnail/genomeBrowserBanner.jpg"
 bookmark: true
 ---
 
