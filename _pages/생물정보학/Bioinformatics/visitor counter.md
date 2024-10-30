@@ -24,21 +24,80 @@ RNA-seq의 경우 GEO에 넘쳐나는데 이 데이터를 어떻게 분석을 �
 ![geo](https://github.com/user-attachments/assets/f07957b2-0892-4051-981a-1dd017aa69e2)
 
 [GSE201272](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE201272)
+NCBI 사이트 첨부했습니다. 데이터에 대한 내용 확인하시면 됩니다.
 
-|   SampleName   |  Group  |  SRR number |
-|:--------------:|:-------:|:-----------:|
-| siControl rep1 | control | SRR18885343 |
-| siControl rep2 | control | SRR18885342 |
-| siControl rep3 | control | SRR18885341 |
-| siControl rep4 | control | SRR18885340 |
-| siFOXM1 rep1   | test    | SRR18885347 |
-| siFOXM1 rep2   | test    | SRR18885346 |
-| siFOXM1 rep3   | test    | SRR18885345 |
-| siFOXM1 rep4   | test    | SRR18885344 |
-| siMYBL2 rep1   | test2   | SRR18885351 |
-| siMYBL2 rep2   | test2   | SRR18885350 |
-| siMYBL2 rep3   | test2   | SRR18885349 |
-| siMYBL2 rep4   | test2   | SRR18885348 |
+<table>
+  <thead>
+    <tr>
+      <th>SampleName</th>
+      <th>Group</th>
+      <th>SRR number</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #f0f8ff;">
+      <td>siControl rep1</td>
+      <td>control</td>
+      <td>SRR18885343</td>
+    </tr>
+    <tr style="background-color: #f0f8ff;">
+      <td>siControl rep2</td>
+      <td>control</td>
+      <td>SRR18885342</td>
+    </tr>
+    <tr style="background-color: #f0f8ff;">
+      <td>siControl rep3</td>
+      <td>control</td>
+      <td>SRR18885341</td>
+    </tr>
+    <tr style="background-color: #f0f8ff;">
+      <td>siControl rep4</td>
+      <td>control</td>
+      <td>SRR18885340</td>
+    </tr>
+    <tr style="background-color: #ffe4e1;">
+      <td>siFOXM1 rep1</td>
+      <td>test</td>
+      <td>SRR18885347</td>
+    </tr>
+    <tr style="background-color: #ffe4e1;">
+      <td>siFOXM1 rep2</td>
+      <td>test</td>
+      <td>SRR18885346</td>
+    </tr>
+    <tr style="background-color: #ffe4e1;">
+      <td>siFOXM1 rep3</td>
+      <td>test</td>
+      <td>SRR18885345</td>
+    </tr>
+    <tr style="background-color: #ffe4e1;">
+      <td>siFOXM1 rep4</td>
+      <td>test</td>
+      <td>SRR18885344</td>
+    </tr>
+    <tr style="background-color: #f5f5dc;">
+      <td>siMYBL2 rep1</td>
+      <td>test2</td>
+      <td>SRR18885351</td>
+    </tr>
+    <tr style="background-color: #f5f5dc;">
+      <td>siMYBL2 rep2</td>
+      <td>test2</td>
+      <td>SRR18885350</td>
+    </tr>
+    <tr style="background-color: #f5f5dc;">
+      <td>siMYBL2 rep3</td>
+      <td>test2</td>
+      <td>SRR18885349</td>
+    </tr>
+    <tr style="background-color: #f5f5dc;">
+      <td>siMYBL2 rep4</td>
+      <td>test2</td>
+      <td>SRR18885348</td>
+    </tr>
+  </tbody>
+</table>
+
 
 위 표는 RNA-seq 데이터를 정리한 표입니다
 
