@@ -140,6 +140,7 @@ fasterq-dump -p --split-3 SRR18885340 ~ SRR18885351
 이런식으로 다운받으시면 되겠죠?
 3개의 파일을 다운받는 이유는 통계적 신뢰성을 확보하기 위함입니다.
 
+**자 마지막으로!! 이 파일은 Paired-end 파일입니다. 그래서 SRR1888534X가 SRR1888534X_1.fastq, SRR1888534X_2.fastq 이렇게 두개의 파일이 다운로드 됩니다! **
 
 ## Data Preprocessing
 
@@ -157,6 +158,26 @@ $ trim_galore -j 4 \ #사용할 쓰레드 수 지정(hotspot = 4)
 ```
 Input data files -> *fastq.gz (raw reads)
 Output data files ->  *fastq.gz (trimmed reads), *trimming_report.txt (trimming report)
+
+<details>
+<summary>하나하나 치기 귀찮을 때</summary>
+<div markdown="1">
+
+```
+# TrimGalore
+ls Desktop/RNA-seq/lung/ |grep _1.fastq | sed 's/_1.fastq//g' | while read line
+> do
+> trim_galore -j 4 --fastqc --paired -o Desktop/RNA-seq/output/TrimGalore/ Desktop/RNA-seq/lung/$line"_1.fastq" Desktop/RNA-seq/lung/$line"_2.fastq"
+> done
+```
+while 함수를 이용한 반복문을 만든 것으로 반복문을 사용하실 때 **매우 중요한 사항**으로는 **Directory 입력**이 틀리면 안됩니다!!
+
+저는 SRR파일을 Desktop에 RNA-seq 폴더가 있구요. 이 RNA-seq 폴더 안에 lung 폴더가 또 있는 구조로 lung폴더에 SRR1888534X.fastq가 있는거에요!
+
+</div>
+</details>
+
+
 
 ## Data Mapping
 
