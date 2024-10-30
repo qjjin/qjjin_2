@@ -60,11 +60,13 @@ $ trim_galore -j 4 \ #사용할 쓰레드 수 지정(hotspot = 4)
 [Reference Genome data Download](https://www.gencodegenes.org/)
 
 > bowtie2-Build
+
 ```
 $ bowtie2-build Desktop/ChIP-Seq/fasta/GRCh38.p13.genome.fa GRCh38
 ```
 
 > bowtie2
+
 ```
 $ bowtie2 -p 8 -x Desktop/ChIP-Seq/bowtie2/reference/GRCh38 file.fastq > file.sam
 ```
@@ -84,11 +86,13 @@ $ sambamba sort -p -t 8 -o file.sorted.bam file.bam
 ```
 
 > Filter out duplicates
+
 ```
 $ sambamba view -p -h -t 8 -f bam -F "[XS] == null and not unmapped and not duplicate" file.sorted.bam > file.rmdup.bam
 ```
 
 > Index BAM
+
 ```
 $ samtools index file.rmdup.bam
 ```
@@ -97,23 +101,26 @@ $ samtools index file.rmdup.bam
 [HOMER](http://homer.ucsd.edu/homer/)
 
 > [설치](https://www.notion.so/ChIP-Seq-7521d94f358d46b3a92a378b54edf18f?pvs=4#dad827534ef44fb6b7807f1557fdfa9b)
+
 ```
 $ perl configureHomer.pl -install
 ```
 
 > Creating tag directory
+
 ```
 $ makeTagDirectory ${tagDirectory} file.rmdup.bam
 ```
 
-> Peak calling - homer(findPeaks, pos2bed.pl), bedtools
+> Peak calling - [HOMER](http://homer.ucsd.edu/homer/), [BEDtools](https://bedtools.readthedocs.io/en/latest/)
+
 ```
 $ findPeaks ${tagDirectory} -style factor -o auto -i ${control_tagDirectory}
 $ pos2bed.pl ${tagDirectory}/peaks.txt > ${output}.bed
 ```
 
-### Blockquotes
-To create a blockquote, add a `>` in front of a paragraph.
+### Downstream Analysis
+Peak visualization, Motif analysis, Annotating peaks, Peak clustering, Gene Ontology(GO), Heatmap and density plot
 
 ```
 > Yongha Kim is the best developer in the world.
