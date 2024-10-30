@@ -10,8 +10,6 @@ thumbnail: "![image](https://github.com/user-attachments/assets/dca15375-1046-41
 bookmark: true
 ---
 
-놀고먹은 대학원생의 전공지식..ㅎ
-
 # Question
 ---
 
