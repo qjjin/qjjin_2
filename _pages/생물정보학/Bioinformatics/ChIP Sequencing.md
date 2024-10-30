@@ -98,8 +98,7 @@ $ samtools index file.rmdup.bam
 ### Peak calling
 [HOMER](http://homer.ucsd.edu/homer/)
 
-> 설치
-[설치](https://www.notion.so/ChIP-Seq-7521d94f358d46b3a92a378b54edf18f?pvs=4#dad827534ef44fb6b7807f1557fdfa9b)
+> [설치](https://www.notion.so/ChIP-Seq-7521d94f358d46b3a92a378b54edf18f?pvs=4#dad827534ef44fb6b7807f1557fdfa9b)
 ```
 $ perl configureHomer.pl -install
 ```
@@ -108,6 +107,7 @@ $ perl configureHomer.pl -install
 ```
 $ makeTagDirectory ${tagDirectory} file.rmdup.bam
 ```
+
 > Peak calling - homer(findPeaks, pos2bed.pl), bedtools
 ```
 $ findPeaks ${tagDirectory} -style factor -o auto -i ${control_tagDirectory}
