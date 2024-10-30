@@ -114,6 +114,8 @@ NCBI 사이트 첨부했습니다. 데이터에 대한 내용 확인하시면 �
 
 
 fastq-dump설치 과정은 위 사이트를 참고해주세요!
+
+**Example**
 ```
 $ fastq-dump --gzip \ #gz압축파일로 다운로드
 --split-files \ #for paired-end studies
@@ -128,6 +130,16 @@ $ fasterq-dump -p \
 ```
 fasterq-dump -p --split-3 SRR18885340 ~ SRR18885351
 ```
+
+**파일의 용량이 큽니다.** 
+혹시나 저장공간이 부족하다하면 Control 파일 3개 / FOXM1 3개 혹은 MYBL2 3개 이런식으로 다운받아주세요.
+
+**Control 3 / FOXM1 3**
+**Control 3 / MYBL2 3**
+
+이런식으로 다운받으시면 되겠죠?
+3개의 파일을 다운받는 이유는 통계적 신뢰성을 확보하기 위함입니다.
+
 
 ## Data Preprocessing
 
