@@ -6,7 +6,7 @@ tags:
     - UCSC
     - EMSEMBL
 date: "2024-10-14"
-thumbnail: "https://i.ibb.co/V9j2Qsg/giscus-Wl0-X3byd-az-U68-1.webp"
+thumbnail: "![image](https://github.com/user-attachments/assets/dca15375-1046-4115-ab26-91865332ab2d)"
 bookmark: true
 ---
 
