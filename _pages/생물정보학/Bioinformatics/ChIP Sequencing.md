@@ -39,23 +39,79 @@ DNA에 binding한 protein 혹은 histone modification을 검출하기 위한 분
     - Annotation은 peak과 관련된 유전자 정보, enhancer 정보 등을 분석한다. 
     - Motif analysis는 peak 내의 DNA서열을 이용하여 특이적인 motif 들을 찾아낸다.
 
-
-|Markdown|HTML|Rendered Output|
-|---|---|---|
-|\# Header 1|<h1>Header 1</h1>|<span class="sh1">Header 1</span>|
-|\#\# Header 2|<h2>Header 2</h2>|<span class="sh2">Header 2</span>|
-|\#\#\# Header 3|<h3>Header 3</h3>|<span class="sh3">Header 3</span>|
-
-# Emphasis
+# ChIP Seq 분석
 ---
-You can add emphasis by making text bold or italic.
+### Trimming(QC)
+[TrimGalore](https://github.com/FelixKrueger/TrimGalore)
 
+```
+$ trim_galore -j 4 \ #사용할 쓰레드 수 지정(hotspot = 4)
+              --fastqc \ #quality check
+              -o(--output_dir) /path/to/TrimGalore/output/directory \
+              /path/to/forward/reads \
+              /path/to/reverse/reads #if single end, only forward reads
+```
 
-### Bold
-To bold text, add <u>two asterisks</u> (e.g., `**text**` = **text**) or underscores before and after a word or phrase. To bold the middle of a word for emphasis, add two asterisks without spaces around the letters.
+### Mapping
+[Bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
 
-### Italic
-To italicize text, add <u>one asterisk</u> (e.g., `*text*` = *text*) or underscore before and after a word or phrase. To italicize the middle of a word for emphasis, add one asterisk without spaces around the letters.
+> Reference Genome 필요!
+>
+> fasta(염기서열) + gtf(유전자 주석정보)
+[Reference Genome data Download](https://www.gencodegenes.org/)
+
+> bowtie2-Build
+
+```
+$ bowtie2-build Desktop/ChIP-Seq/fasta/GRCh38.p13.ge오후 4:42 2024-10-30nome.fa GRCh38
+```
+> bowtie2
+
+```
+$ bowtie2 -p 8 -x Desktop/ChIP-Seq/bowtie2/reference/GRCh38 file.fastq > file.sam
+```
+
+[samtools](https://www.htslib.org/)
+
+```
+$ samtools view -b -S file.sam > file.bam
+```
+
+### Sorting
+[sambamba](https://github.com/biod/sambamba)
+
+> Sort BAM file by genomic coordinates
+
+```
+$ sambamba sort -p -t 8 -o file.sorted.bam file.bam
+```
+> Filter out duplicates
+
+```
+$ sambamba view -p -h -t 8 -f bam -F "[XS] == null and not unmapped and not duplicate" file.sorted.bam > file.rmdup.bam
+```
+> Index BAM
+
+```
+$ samtools index file.rmdup.bam
+```
+
+### Peak calling
+[HOMER](http://homer.ucsd.edu/homer/)
+> 설치
+[설치](https://www.notion.so/ChIP-Seq-7521d94f358d46b3a92a378b54edf18f?pvs=4#dad827534ef44fb6b7807f1557fdfa9b)
+```
+$ perl configureHomer.pl -install
+```
+> Creating tag directory
+```
+$ makeTagDirectory ${tagDirectory} file.rmdup.bam
+```
+> Peak calling - homer(findPeaks, pos2bed.pl), bedtools
+```
+$ findPeaks ${tagDirectory} -style factor -o auto -i ${control_tagDirectory}
+$ pos2bed.pl ${tagDirectory}/peaks.txt > ${output}.bed
+```
 
 ### Blockquotes
 To create a blockquote, add a `>` in front of a paragraph.
