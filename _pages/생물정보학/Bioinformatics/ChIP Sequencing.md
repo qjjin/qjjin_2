@@ -62,7 +62,7 @@ $ trim_galore -j 4 \ #사용할 쓰레드 수 지정(hotspot = 4)
 > bowtie2-Build
 
 ```
-$ bowtie2-build Desktop/ChIP-Seq/fasta/GRCh38.p13.ge오후 4:42 2024-10-30nome.fa GRCh38
+$ bowtie2-build Desktop/ChIP-Seq/fasta/GRCh38.p13.genome.fa GRCh38
 ```
 > bowtie2
 
@@ -97,11 +97,13 @@ $ samtools index file.rmdup.bam
 
 ### Peak calling
 [HOMER](http://homer.ucsd.edu/homer/)
+
 > 설치
 [설치](https://www.notion.so/ChIP-Seq-7521d94f358d46b3a92a378b54edf18f?pvs=4#dad827534ef44fb6b7807f1557fdfa9b)
 ```
 $ perl configureHomer.pl -install
 ```
+
 > Creating tag directory
 ```
 $ makeTagDirectory ${tagDirectory} file.rmdup.bam
