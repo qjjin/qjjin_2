@@ -4,7 +4,7 @@ tags:
     - omics
     - NGS
     - epigenetics
-date: "2024-10-30"오전 11:16 2024-10-31
+date: "2024-10-30"
 thumbnail: "/assets/img/thumbnail/sample.png"
 bookmark: true
 ---
