@@ -4,7 +4,7 @@ tags:
     - omics
     - NGS
     - epigenetics
-date: "2024-10-30"
+date: "2024-10-30"오전 11:16 2024-10-31
 thumbnail: "/assets/img/thumbnail/sample.png"
 bookmark: true
 ---
@@ -31,24 +31,24 @@ DNA에 binding한 protein 혹은 histone modification을 검출하기 위한 분
 4. (Reverse-cross linking) Cross-linking을 풀고 DNA를 정제하여 protein이 결합되어있던 부위의 시퀀싱을 진행한다.
 
 - ChIP-seq 데이터를 분석하는 방법
-1. Quality control : FastQC등의 툴을 사용하여 시퀀싱 리드들의 quality를 확인하고, TrimGalore, Trimmomatic등을 이용하여 시퀀싱에 사용된 adapter들과 시퀀싱 quality가 낮은 서열들을 제거한다
-2. Alignment : Bowtie, BWA등의 툴을 사용하여 reference genome에 mapping을 진행한다. 이 때, 중복된 리드인 PCR duplicate와 mapping quality가 낮은 서열들을 제거해주는 과정이 필요하다
-3. Peak calling : MACS, homer, SICER등의 툴을 사용하여 단백질이 결합된 DNA영역인 peak를 식별한다
-4. Downstream analysis : Peak calling 이후, annotation, clustering, motif analysis등의 분석을 진행한다. 
-    - Annotation은 peak과 관련된 유전자 정보, enhancer 정보 등을 분석한다. 
-    - Motif analysis는 peak 내의 DNA서열을 이용하여 특이적인 motif 들을 찾아낸다.
+1. **Quality control** : FastQC등의 툴을 사용하여 시퀀싱 리드들의 quality를 확인하고, TrimGalore, Trimmomatic등을 이용하여 시퀀싱에 사용된 adapter들과 시퀀싱 quality가 낮은 서열들을 제거한다
+2. **Alignment** : Bowtie, BWA등의 툴을 사용하여 reference genome에 mapping을 진행한다. 이 때, 중복된 리드인 PCR duplicate와 mapping quality가 낮은 서열들을 제거해주는 과정이 필요하다
+3. **Peak calling** : MACS, homer, SICER등의 툴을 사용하여 단백질이 결합된 DNA영역인 peak를 식별한다
+4. **Downstream analysis** : Peak calling 이후, annotation, clustering, motif analysis등의 분석을 진행한다. 
+	- **Annotation**은 peak과 관련된 유전자 정보, enhancer 정보 등을 분석한다. 
+	- **Motif analysis**는 peak 내의 DNA서열을 이용하여 특이적인 motif 들을 찾아낸다.
 
 # ChIP Seq 분석
 ---
 
 ### 시작하기 전 용어 정리
-$threads -> threads
-$genome -> reference fasta file(genome index)
-$fq -> fastq file
-$align_out -> unsorted.sam
-$align_bam -> unsorted.bam
-$align_sorted -> sorted.bam
-$align_filtered -> rmdup.bam
+**$threads -> threads**
+**$genome -> reference fasta file(genome index)**
+**$fq -> fastq file**
+**$align_out -> unsorted.sam**
+**$align_bam -> unsorted.bam**
+**$align_sorted -> sorted.bam**
+**$align_filtered -> rmdup.bam**
 
 
 
