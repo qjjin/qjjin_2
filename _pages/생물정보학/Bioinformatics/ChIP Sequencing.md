@@ -55,13 +55,13 @@ $align_filtered -> rmdup.bam
 ### Trimming(QC)
 [TrimGalore](https://github.com/FelixKrueger/TrimGalore)
 
-```
+```bash
 $ trim_galore -j 4 \ #사용할 쓰레드 수 지정(hotspot = 4)
               --fastqc \ #quality check
               -o(--output_dir) /path/to/TrimGalore/output/directory \
               /path/to/forward/reads \
               /path/to/reverse/reads #if single end, only forward reads
-```
+```bash
 
 ### Mapping
 [Bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
@@ -73,86 +73,86 @@ $ trim_galore -j 4 \ #사용할 쓰레드 수 지정(hotspot = 4)
 
 > bowtie2-Build
 
-```
+```bash
 $ bowtie2-build Desktop/ChIP-Seq/fasta/GRCh38.p13.genome.fa GRCh38
-```
+```bash
 
 > bowtie2
 
-```
+```bash
 bowtie2 -p $threads -q -x $genome -U $fq -S $align_out
-```
+```bash
 
 example
-```
+```bash
 $ bowtie2 -p 8 -x Desktop/ChIP-Seq/bowtie2/reference/GRCh38 file.fastq > file.sam
-```
+```bash
 
 [samtools](https://www.htslib.org/)
 
-```
+```bash
 $ samtools view -h -S -b -@ $threads -o $align_bam $align_out
-```
+```bash
 example
-```
+```bash
 $ samtools view -b -S file.sam > file.bam
-```
+```bash
 
 ### Sorting
 [sambamba](https://github.com/biod/sambamba)
 > Sort BAM file by genomic coordinates
 
-```
+```bash
 sambamba sort -p -t $threads -o $align_sorted $align_bam
-```
+```bash
 example
-```
+```bash
 $ sambamba sort -p -t 8 -o file.sorted.bam file.bam
-```
+```bash
 
 > Filter out duplicates
 
-```
+```bash
 $ sambamba view -p -h -t $threads -f bam -F "[XS] == null and not unmapped and not duplicate" $align_sorted > $align_filtered
-```
+```bash
 
 > Index BAM
 
-```
+```bash
 $ samtools index file.rmdup.bam
-```
+```bash
 
 ### Peak calling
 [HOMER](http://homer.ucsd.edu/homer/)
 
 > [설치](https://www.notion.so/ChIP-Seq-7521d94f358d46b3a92a378b54edf18f?pvs=4#dad827534ef44fb6b7807f1557fdfa9b)
 
-```
+```bash
 $ perl configureHomer.pl -install
-```
+```bash
 
 > Creating tag directory
 
-```
+```bash
 $ makeTagDirectory ${tagDirectory} ${filteredBAM}
-```
+```bash
 
 > Peak calling - [HOMER](http://homer.ucsd.edu/homer/), [BEDtools](https://bedtools.readthedocs.io/en/latest/)
 
-```
+```bash
 $ findPeaks ${tagDirectory} -style factor -o auto -i ${control_tagDirectory}
 $ pos2bed.pl ${tagDirectory}/peaks.txt > ${output}.bed
-```
+```bash
 
 > Replicates가 존재할 경우 각각의 tag directory와 peak calling을 진행, BEDtools를 이용하여 합치기
 
-```
+```bash
 $ findPeaks ${tagDirectory_rep1} -style factor -o auto -i ${control_tagDirectory_rep1}
 $ findPeaks ${tagDirectory_rep2} -style factor -o auto -i ${control_tagDirectory_rep2}
 $ pos2bed.pl ${tagDirectory_rep1}/peaks.txt > ${rep1}.bed
 $ pos2bed.pl ${tagDirectory_rep2}/peaks.txt > ${rep2}.bed
 $ bedtools intersect -a ${rep1}.bed -b ${rep2}.bed > ${common}.bed
-```
+```bash
 
 
 ### Downstream Analysis
@@ -160,183 +160,52 @@ Peak visualization, Motif analysis, Annotating peaks, Peak clustering, Gene Onto
 
 > Peak visualization - [deepTools](https://deeptools.readthedocs.io/en/develop/)
 
-```
+```bash
 $ bamCoverage -b ${filteredBAM} -o ${output}.bw --binSize 20
-```
+```bash
 
-> Yongha Kim is the best developer in the world.
->
-> Factos 👍👀
+> Motif analysis - HOMER
 
-# Lists
-You can organize items into ordered and unordered lists.
+```bash
+$ findMotifsGenome.pl ${common}.bed hg38 ${outputDirectory} -size 150 -mask
+```bash
 
-### Ordered Lists
-To create an ordered list, add line items with numbers followed by periods. The numbers don’t have to be in numerical order, but the list should start with the number one.
+> Merging replicates tag directory - HOMER
 
-```
-1. First item
-2. Second item
-3. Third item
-4. Fourth item
-```
+```bash
+$ makeTagDirectory ${tagDirectory_merged} -d ${tagDirectory_rep1} ${tagDirectory_rep2}
+```bash
 
-1. First item
-2. Second item
-3. Third item
-4. Fourth item
+> Annotating peaks - HOMER
 
-### Unordered Lists
-To create an unordered list, add dashes (`-`), asterisks (`*`), or plus signs (`+`) in front of line items. Indent one or more items to create a nested list.
+```bash
+$ annotatePeaks.pl ${common}.bed hg38 -m ${top2_motif}.motif -d ${tagDirectory_merged} > ${annotation}.txt
+```bash
 
-```
-* First item
-* Second item
-* Third item
-* Fourth item
-```
+> Peak clustering - HOMER
 
-* First item
-* Second item
-* Third item
-* Fourth item
+```bash
+$ mergePeaks ${GM12878_common}.bed ${HepG2_common}.bed ${K562_common}.bed ${MCF7_common}.bed > all_merged.peaks
+$ notatePeaks.pl all_merged.peaks hg38 -m ${top2_motif}.motif -d ${GM12878_merged_tagDir} ${HepG2_merged_tagDir} ${K562_merged_tagDir} ${MCF7_merged_tagDir} > merged_peaks_ann.txt 
+```bash
 
-# Code
-To denote a word or phrase as code, enclose it in backticks (`).
+> Gene Ontology(GO) - [metascape](https://metascape.org/gp/index.html#/main/step1)
+Using top 500 binding sites sorted by the density of ChIP-seq reads
 
-|Markdown|HTML|Rendered Output|
-|---|---|---|
-|At the command prompt, type \`nano\`.|At the command prompt, type \<code>nano\</code>.|At the command prompt, type `nano`.|
+> Heatmap and density plot - deepTools
 
-### Escaping Backticks
-If the word or phrase you want to denote as code includes one or more backticks, you can escape it by enclosing the word or phrase in double backticks (``).
-
-|Markdown|HTML|Rendered Output|
-|---|---|---|
-|\`\`Use \`code\` in your Markdown file.\`\`|\<code>Use \`code\` in your Markdown file.\</code>|``Use `code` in your Markdown file.``|
-
-### Code Blocks
-To create code blocks that spans multiple lines of code, set the text inside three or more backquotes ( ``` ) or tildes ( ~~~ ).
-
-```xml
-<html>
-  <head>
-  </head>
-</html>
-```
-
-```python
-def foo():
-  a = 1
-  for i in [1,2,3]:
-    a += i
-```
-
-# Horizontal Rules
-To create a horizontal rule, use three or more asterisks (`***`), dashes (`---`), or underscores (`___`) on a line by themselves.
-
-```text
-***
-
----
-
-_________________
-```
-
-# Links
-To create a link, enclose the link text in brackets (e.g., [Blue Archive]) and then follow it immediately with the URL in parentheses (e.g., (https://bluearchive.nexon.com)).
-
-```text
-My favorite mobile game is [Blue Archive](https://bluearchive.nexon.com).
-```
-
-The rendered output looks like this:
-
-My favorite mobile game is [Blue Archive](https://bluearchive.nexon.com).
-
-
-### Adding Titles
-
-You can optionally add a title for a link. This will appear as a tooltip when the user hovers over the link. To add a title, enclose it in quotation marks after the URL.
-
-```text
-My favorite mobile game is [Blue Archive](https://bluearchive.nexon.com "All senseis are welcome!").
-```
-
-The rendered output looks like this:
-
-My favorite mobile game is [Blue Archive](https://bluearchive.nexon.com "All senseis are welcome!").
-
-
-### URLs and Email Addresses
-To quickly turn a URL or email address into a link, enclose it in angle brackets.
-
-```text
-<https://www.youtube.com/>
-<fake@example.com>
-```
-
-The rendered output looks like this:
-<https://www.youtube.com/>
-<fake@example.com>
-
-# Images
-To add an image, add an exclamation mark (`!`), followed by alt text in brackets, and the path or URL to the image asset in parentheses. You can optionally add a title in quotation marks after the path or URL.
-
-```text
-![Tropical Paradise](/assets/img/example.jpg "Maldives, in October")
-```
-
-The rendered output looks like this: ![Tropical Paradise](/assets/img/example.jpg "Maldives, in October")
-
-### Linking Images
-To add a link to an image, enclose the Markdown for the image in brackets, and then add the link in parentheses.
-
-```text
-[![La Mancha](/assets/img/La-Mancha.jpg "La Mancha: Spain, Don Quixote")](https://www.britannica.com/place/La-Mancha)
-```
-
-The rendered output looks like this: [![La Mancha](/assets/img/La-Mancha.jpg "La Mancha: Spain, Don Quixote")](https://www.britannica.com/place/La-Mancha)
-
-# Escaping Characters
-To display a literal character that would otherwise be used to format text in a Markdown document, add a backslash (`\`) in front of the character.
-
-```text
-\* Without the backslash, this would be a bullet in an unordered list.
-```
-
-The rendered output looks like this:
-
-\* Without the backslash, this would be a bullet in an unordered list.
-
-### Characters You Can Escape
-You can use a backslash to escape the following characters.
-
-|Character|Name|
-|---|---|
-|\`|backtick|
-|\*|asterisk|
-|\_|underscore|
-|\{\}|curly braces|
-|\[\]|brackets|
-|\<\>|angle brackets|
-|\(\)|parentheses|
-|\#|pound sign|
-|\+|plus sign|
-|\-|minus sign \(hyphen\)|
-|\.|dot|
-|\!|exclamation mark|
-|\||pipe|
-
-# HTML
-Many Markdown applications allow you to use `HTML` tags in Markdown-formatted text. This is helpful if you prefer certain `HTML` tags to Markdown syntax. For example, some people find it easier to use `HTML` tags for images. Using `HTML` is also helpful when you need to change the attributes of an element, like specifying the color of text or changing the width of an image.
-
-To use `HTML`, place the tags in the text of your Markdown-formatted file.
-
-```
-This **word** is bold. This <span style="font-style: italic;">word</span> is italic.
-```
-
-The rendered output looks like this:
-
-This **word** is bold. This <span style="font-style: italic;">word</span> is italic.
+```bash
+computeMatrix reference-point -S ${all bigwig files} -R ${clustered all peak files}.bed \ 
+-a 2000 -b 2000 --referencePoint "center" --skipZeros --missingDataAsZero\
+-o matrix_cluter.gz --outFileSortedRegions matrix_cluster.bed --outFileNameMatrix matrix_cluster.tab
+```bash
+```bash
+plotHeatmap -m MCF-7.gz -o MCF-7_name.png \
+--colorList "white, blue" --interpolationMethod "nearest" \
+--whatToShow "heatmap and colorbar" --samplesLabel MCF-7 "Control" \
+--regionsLabel MCF-7
+```bash
+```bash
+plotProfile -m T47D.gz -o T47D_density.png --samplesLabel T47D "Control" \
+--regionsLabel T47D --perGroup
+```bash
