@@ -83,7 +83,7 @@ $ bowtie2-build Desktop/ChIP-Seq/fasta/GRCh38.p13.genome.fa GRCh38
 bowtie2 -p $threads -q -x $genome -U $fq -S $align_out
 ```
 
-# example
+example
 ```
 $ bowtie2 -p 8 -x Desktop/ChIP-Seq/bowtie2/reference/GRCh38 file.fastq > file.sam
 ```
