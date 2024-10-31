@@ -55,13 +55,13 @@ $align_filtered -> rmdup.bam
 ### Trimming(QC)
 [TrimGalore](https://github.com/FelixKrueger/TrimGalore)
 
-```bash
+```
 $ trim_galore -j 4 \ #사용할 쓰레드 수 지정(hotspot = 4)
               --fastqc \ #quality check
               -o(--output_dir) /path/to/TrimGalore/output/directory \
               /path/to/forward/reads \
               /path/to/reverse/reads #if single end, only forward reads
-```bash
+```
 
 ### Mapping
 [Bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
@@ -73,86 +73,86 @@ $ trim_galore -j 4 \ #사용할 쓰레드 수 지정(hotspot = 4)
 
 > bowtie2-Build
 
-```bash
+```
 $ bowtie2-build Desktop/ChIP-Seq/fasta/GRCh38.p13.genome.fa GRCh38
-```bash
+```
 
 > bowtie2
 
-```bash
+```
 bowtie2 -p $threads -q -x $genome -U $fq -S $align_out
-```bash
+```
 
 example
-```bash
+```
 $ bowtie2 -p 8 -x Desktop/ChIP-Seq/bowtie2/reference/GRCh38 file.fastq > file.sam
-```bash
+```
 
 [samtools](https://www.htslib.org/)
 
-```bash
+```
 $ samtools view -h -S -b -@ $threads -o $align_bam $align_out
-```bash
+```
 example
-```bash
+```
 $ samtools view -b -S file.sam > file.bam
-```bash
+```
 
 ### Sorting
 [sambamba](https://github.com/biod/sambamba)
 > Sort BAM file by genomic coordinates
 
-```bash
+```
 sambamba sort -p -t $threads -o $align_sorted $align_bam
-```bash
+```
 example
-```bash
+```
 $ sambamba sort -p -t 8 -o file.sorted.bam file.bam
-```bash
+```
 
 > Filter out duplicates
 
-```bash
+```
 $ sambamba view -p -h -t $threads -f bam -F "[XS] == null and not unmapped and not duplicate" $align_sorted > $align_filtered
-```bash
+```
 
 > Index BAM
 
-```bash
+```
 $ samtools index file.rmdup.bam
-```bash
+```
 
 ### Peak calling
 [HOMER](http://homer.ucsd.edu/homer/)
 
 > [설치](https://www.notion.so/ChIP-Seq-7521d94f358d46b3a92a378b54edf18f?pvs=4#dad827534ef44fb6b7807f1557fdfa9b)
 
-```bash
+```
 $ perl configureHomer.pl -install
-```bash
+```
 
 > Creating tag directory
 
-```bash
+```
 $ makeTagDirectory ${tagDirectory} ${filteredBAM}
-```bash
+```
 
 > Peak calling - [HOMER](http://homer.ucsd.edu/homer/), [BEDtools](https://bedtools.readthedocs.io/en/latest/)
 
-```bash
+```
 $ findPeaks ${tagDirectory} -style factor -o auto -i ${control_tagDirectory}
 $ pos2bed.pl ${tagDirectory}/peaks.txt > ${output}.bed
-```bash
+```
 
 > Replicates가 존재할 경우 각각의 tag directory와 peak calling을 진행, BEDtools를 이용하여 합치기
 
-```bash
+```
 $ findPeaks ${tagDirectory_rep1} -style factor -o auto -i ${control_tagDirectory_rep1}
 $ findPeaks ${tagDirectory_rep2} -style factor -o auto -i ${control_tagDirectory_rep2}
 $ pos2bed.pl ${tagDirectory_rep1}/peaks.txt > ${rep1}.bed
 $ pos2bed.pl ${tagDirectory_rep2}/peaks.txt > ${rep2}.bed
 $ bedtools intersect -a ${rep1}.bed -b ${rep2}.bed > ${common}.bed
-```bash
+```
 
 
 ### Downstream Analysis
@@ -160,52 +160,52 @@ Peak visualization, Motif analysis, Annotating peaks, Peak clustering, Gene Onto
 
 > Peak visualization - [deepTools](https://deeptools.readthedocs.io/en/develop/)
 
-```bash
+```
 $ bamCoverage -b ${filteredBAM} -o ${output}.bw --binSize 20
-```bash
+```
 
 > Motif analysis - HOMER
 
-```bash
+```
 $ findMotifsGenome.pl ${common}.bed hg38 ${outputDirectory} -size 150 -mask
-```bash
+```
 
 > Merging replicates tag directory - HOMER
 
-```bash
+```
 $ makeTagDirectory ${tagDirectory_merged} -d ${tagDirectory_rep1} ${tagDirectory_rep2}
-```bash
+```
 
 > Annotating peaks - HOMER
 
-```bash
+```
 $ annotatePeaks.pl ${common}.bed hg38 -m ${top2_motif}.motif -d ${tagDirectory_merged} > ${annotation}.txt
-```bash
+```
 
 > Peak clustering - HOMER
 
-```bash
+```
 $ mergePeaks ${GM12878_common}.bed ${HepG2_common}.bed ${K562_common}.bed ${MCF7_common}.bed > all_merged.peaks
 $ notatePeaks.pl all_merged.peaks hg38 -m ${top2_motif}.motif -d ${GM12878_merged_tagDir} ${HepG2_merged_tagDir} ${K562_merged_tagDir} ${MCF7_merged_tagDir} > merged_peaks_ann.txt 
-```bash
+```
 
 > Gene Ontology(GO) - [metascape](https://metascape.org/gp/index.html#/main/step1)
 Using top 500 binding sites sorted by the density of ChIP-seq reads
 
 > Heatmap and density plot - deepTools
 
-```bash
+```
 computeMatrix reference-point -S ${all bigwig files} -R ${clustered all peak files}.bed \ 
 -a 2000 -b 2000 --referencePoint "center" --skipZeros --missingDataAsZero\
 -o matrix_cluter.gz --outFileSortedRegions matrix_cluster.bed --outFileNameMatrix matrix_cluster.tab
-```bash
-```bash
+```
+```
 plotHeatmap -m MCF-7.gz -o MCF-7_name.png \
 --colorList "white, blue" --interpolationMethod "nearest" \
 --whatToShow "heatmap and colorbar" --samplesLabel MCF-7 "Control" \
 --regionsLabel MCF-7
-```bash
-```bash
+```
+```
 plotProfile -m T47D.gz -o T47D_density.png --samplesLabel T47D "Control" \
 --regionsLabel T47D --perGroup
-```bash
+```
