@@ -40,6 +40,18 @@ DNA에 binding한 protein 혹은 histone modification을 검출하기 위한 분
 
 # ChIP Seq 분석
 ---
+
+### 시작하기 전 용어 정리
+# $threads -> threads
+# $genome -> reference fasta file(genome index)
+# $fq -> fastq file
+# $align_out -> unsorted.sam
+# $align_bam -> unsorted.bam
+# $align_sorted -> sorted.bam
+# $align_filtered -> rmdup.bam
+
+
+
 ### Trimming(QC)
 [TrimGalore](https://github.com/FelixKrueger/TrimGalore)
 
@@ -68,11 +80,20 @@ $ bowtie2-build Desktop/ChIP-Seq/fasta/GRCh38.p13.genome.fa GRCh38
 > bowtie2
 
 ```
+bowtie2 -p $threads -q -x $genome -U $fq -S $align_out
+```
+
+# example
+```
 $ bowtie2 -p 8 -x Desktop/ChIP-Seq/bowtie2/reference/GRCh38 file.fastq > file.sam
 ```
 
 [samtools](https://www.htslib.org/)
 
+```
+$ samtools view -h -S -b -@ $threads -o $align_bam $align_out
+```
+example
 ```
 $ samtools view -b -S file.sam > file.bam
 ```
@@ -82,13 +103,17 @@ $ samtools view -b -S file.sam > file.bam
 > Sort BAM file by genomic coordinates
 
 ```
+sambamba sort -p -t $threads -o $align_sorted $align_bam
+```
+example
+```
 $ sambamba sort -p -t 8 -o file.sorted.bam file.bam
 ```
 
 > Filter out duplicates
 
 ```
-$ sambamba view -p -h -t 8 -f bam -F "[XS] == null and not unmapped and not duplicate" file.sorted.bam > file.rmdup.bam
+$ sambamba view -p -h -t $threads -f bam -F "[XS] == null and not unmapped and not duplicate" $align_sorted > $align_filtered
 ```
 
 > Index BAM
@@ -109,7 +134,7 @@ $ perl configureHomer.pl -install
 > Creating tag directory
 
 ```
-$ makeTagDirectory ${tagDirectory} file.rmdup.bam
+$ makeTagDirectory ${tagDirectory} ${filteredBAM}
 ```
 
 > Peak calling - [HOMER](http://homer.ucsd.edu/homer/), [BEDtools](https://bedtools.readthedocs.io/en/latest/)
@@ -119,13 +144,24 @@ $ findPeaks ${tagDirectory} -style factor -o auto -i ${control_tagDirectory}
 $ pos2bed.pl ${tagDirectory}/peaks.txt > ${output}.bed
 ```
 
+> Replicates가 존재할 경우 각각의 tag directory와 peak calling을 진행, BEDtools를 이용하여 합치기
+
+```
+$ findPeaks ${tagDirectory_rep1} -style factor -o auto -i ${control_tagDirectory_rep1}
+$ findPeaks ${tagDirectory_rep2} -style factor -o auto -i ${control_tagDirectory_rep2}
+$ pos2bed.pl ${tagDirectory_rep1}/peaks.txt > ${rep1}.bed
+$ pos2bed.pl ${tagDirectory_rep2}/peaks.txt > ${rep2}.bed
+$ bedtools intersect -a ${rep1}.bed -b ${rep2}.bed > ${common}.bed
+```
+
+
 ### Downstream Analysis
 Peak visualization, Motif analysis, Annotating peaks, Peak clustering, Gene Ontology(GO), Heatmap and density plot
 
+> Peak visualization - [deepTools](https://deeptools.readthedocs.io/en/develop/)
+
 ```
-> Yongha Kim is the best developer in the world.
->
-> Factos 👍👀
+$ bamCoverage -b ${filteredBAM} -o ${output}.bw --binSize 20
 ```
 
 > Yongha Kim is the best developer in the world.
