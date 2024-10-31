@@ -42,13 +42,13 @@ DNA에 binding한 protein 혹은 histone modification을 검출하기 위한 분
 ---
 
 ### 시작하기 전 용어 정리
-# $threads -> threads
-# $genome -> reference fasta file(genome index)
-# $fq -> fastq file
-# $align_out -> unsorted.sam
-# $align_bam -> unsorted.bam
-# $align_sorted -> sorted.bam
-# $align_filtered -> rmdup.bam
+$threads -> threads
+$genome -> reference fasta file(genome index)
+$fq -> fastq file
+$align_out -> unsorted.sam
+$align_bam -> unsorted.bam
+$align_sorted -> sorted.bam
+$align_filtered -> rmdup.bam
 
 
 
