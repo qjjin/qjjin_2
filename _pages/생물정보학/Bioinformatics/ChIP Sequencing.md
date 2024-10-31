@@ -80,7 +80,7 @@ $ bowtie2-build Desktop/ChIP-Seq/fasta/GRCh38.p13.genome.fa GRCh38
 > bowtie2
 
 ```
-bowtie2 -p $threads -q -x $genome -U $fq -S $align_out
+$ bowtie2 -p $threads -q -x $genome -U $fq -S $align_out
 ```
 
 example
@@ -103,7 +103,7 @@ $ samtools view -b -S file.sam > file.bam
 > Sort BAM file by genomic coordinates
 
 ```
-sambamba sort -p -t $threads -o $align_sorted $align_bam
+$ sambamba sort -p -t $threads -o $align_sorted $align_bam
 ```
 example
 ```
