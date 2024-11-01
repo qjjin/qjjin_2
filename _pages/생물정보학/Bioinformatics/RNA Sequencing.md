@@ -377,7 +377,7 @@ StringTie의 옵션의 경우
 ## Read Quantification
 
 1. [StringTie](https://ccb.jhu.edu/software/stringtie/)
-[sample_list.txt](https://github.com/user-attachments/files/17552930/sample_list.txt)
+[sample_list.txt](https://github.com/user-attachments/files/17597009/sample_list.txt)
 위 파일을 확인하시고 list파일을 만들어 주셔야합니다.
 
 ```
@@ -387,19 +387,33 @@ stringtie -e -B --rf -G ~/Desktop/RNA-seq/GTF/gencode.v42.basic.annotation.gtf -
 # prepDE(DESeq2 돌리기 전 data 정리)
 prepDE.py3 -i sample_list.txt
 # sample list
-BT20-Sh-1	/home/gyujin/Desktop/data/04.StringTie/BT20-Sh-1Aligned.gtf
-BT20-Sh-2	/home/gyujin/Desktop/data/04.StringTie/BT20-Sh-2Aligned.gtf
-BT20-Sh-3	/home/gyujin/Desktop/data/04.StringTie/BT20-Sh-3Aligned.gtf
-BT20-SW-1	/home/gyujin/Desktop/data/04.StringTie/BT20-SW-1Aligned.gtf
-BT20-SW-2	/home/gyujin/Desktop/data/04.StringTie/BT20-SW-2Aligned.gtf
-BT20-SW-3	/home/gyujin/Desktop/data/04.StringTie/BT20-SW-3Aligned.gtf
-MB231-OE-1	/home/gyujin/Desktop/data/04.StringTie/MB231-OE-1Aligned.gtf
-MB231-OE-2	/home/gyujin/Desktop/data/04.StringTie/MB231-OE-2Aligned.gtf
-MB231-OE-3	/home/gyujin/Desktop/data/04.StringTie/MB231-OE-3Aligned.gtf
-MB231-Vev-1	/home/gyujin/Desktop/data/04.StringTie/MB231-Vev-1Aligned.gtf
-MB231-Vev-2	/home/gyujin/Desktop/data/04.StringTie/MB231-Vev-2Aligned.gtf
-MB231-Vev-3	/home/gyujin/Desktop/data/04.StringTie/MB231-Vev-3Aligned.gtf
+SRR18885340 /home/gyujin/Desktop/data/StringTie/SRR18885340Aligned.gtf
+SRR18885341 /home/gyujin/Desktop/data/StringTie/SRR18885341Aligned.gtf
+SRR18885342 /home/gyujin/Desktop/data/StringTie/SRR18885342Aligned.gtf
+SRR18885343 /home/gyujin/Desktop/data/StringTie/SRR18885343Aligned.gtf
+SRR18885344 /home/gyujin/Desktop/data/StringTie/SRR18885344Aligned.gtf
+SRR18885345 /home/gyujin/Desktop/data/StringTie/SRR18885345Aligned.gtf
+SRR18885346 /home/gyujin/Desktop/data/StringTie/SRR18885346Aligned.gtf
+SRR18885347 /home/gyujin/Desktop/data/StringTie/SRR18885347Aligned.gtf
+SRR18885348 /home/gyujin/Desktop/data/StringTie/SRR18885348Aligned.gtf
+SRR18885349 /home/gyujin/Desktop/data/StringTie/SRR18885349Aligned.gtf
+SRR18885350 /home/gyujin/Desktop/data/StringTie/SRR18885350Aligned.gtf
+SRR18885351 /home/gyujin/Desktop/data/StringTie/SRR18885351Aligned.gtf
+
 ```
+<details>
+<summary>하나하나 치기 귀찮을 때</summary>
+<div markdown="1">
+
+```
+# StringTie
+ls Desktop/RNA-seq/output/BAM/ |grep .sorted |sed 's/.sortedByCoord.out.bam//g' |while read line; do stringtie -e -B -G ~/Desktop/RNA-seq/GTF/gencode.v42.basic.annotation.gtf -P 8 -o Desktop/RNA-seq/output/StringTie/$line'.gtf' Desktop/RNA-seq/output/BAM/$line'.sortedByCoord.out.bam'; done
+```
+
+</div>
+</details>
+
+[gene_count_matrix.csv](https://prod-files-secure.s3.us-west-2.amazonaws.com/5c61eb85-82c5-4041-84cc-50d85e7a95c0/953ef0e5-2f6f-4fb7-927f-1414a512e001/gene_count_matrix.csv)](https://prod-files-secure.s3.us-west-2.amazonaws.com/5c61eb85-82c5-4041-84cc-50d85e7a95c0/953ef0e5-2f6f-4fb7-927f-1414a512e001/gene_count_matrix.csv)
 
 여기까지가 Read Quantification 과정이었으며, 이제 excel로 확인이 가능한 csv파일을 생성했습니다.
 이제 우리는 이 csv파일을 가지고 DEG(Differential expressed gene) 과정을 진행할겁니다.
