@@ -413,7 +413,7 @@ ls Desktop/RNA-seq/output/BAM/ |grep .sorted |sed 's/.sortedByCoord.out.bam//g' 
 </div>
 </details>
 
-
+[data file](https://github.com/qjjin/qjjin_2/raw/main/assets/img/gene_count_matrix.csv)
 여기까지가 Read Quantification 과정이었으며, 이제 excel로 확인이 가능한 csv파일을 생성했습니다.
 이제 우리는 이 csv파일을 가지고 DEG(Differential expressed gene) 과정을 진행할겁니다.
 DEG부터는 리눅스 과정이 아닌 통계프로그램(R)을 이용하여 만들어볼 예정입니다~
