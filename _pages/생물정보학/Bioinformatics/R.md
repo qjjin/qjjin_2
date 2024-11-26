@@ -64,6 +64,12 @@ library 과정을 거쳤다면 데이터를 불러와서 분석을 진행해야�
 ```
 setwd("/Users/사용자/Downloads")
 countData <- as.matrix(read.csv("gene_count_matrix.csv", row.names = "gene_id"))
+colData <- read.csv("phenotype.csv", sep=",")
 ```
 저 같은 경우 setwd를 많이 사용하는 편인데 디렉토리는 당연히 본인에게 맞는 디렉토리가 필요해요.
 data file를 다운받아서 파일을 열어보면 저는 gene_id로 입력을 해놨어요.
+
+4. phenotype data
+갑작스럽게 phenotype.csv 파일을 불러왔어요. '저건 갑자기 무슨 파일이야?' 하실텐데
+[phenotype]((https://github.com/qjjin/qjjin_2/raw/main/assets/img/phenotype.csv)
+위 파일을 참고해주세요.
