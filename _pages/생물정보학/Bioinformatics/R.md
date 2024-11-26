@@ -71,5 +71,5 @@ data file를 다운받아서 파일을 열어보면 저는 gene_id로 입력을 
 
 4. phenotype data
 갑작스럽게 phenotype.csv 파일을 불러왔어요. '저건 갑자기 무슨 파일이야?' 하실텐데
-[phenotype]((https://github.com/qjjin/qjjin_2/raw/main/assets/img/phenotype.csv)
+[phenotype](https://github.com/qjjin/qjjin_2/raw/main/assets/img/phenotype.csv)
 위 파일을 참고해주세요.
